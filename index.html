@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="冰島 1 號公路環島自駕 12–15 天行程：每日景點、時間軸、路線地圖、預訂清單與預算試算。">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>冰島環島自駕手冊</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700;900&display=swap">
+<style>
+/* Layout: road-trip logbook — itinerary timeline on the left, a sticky schematic route map on the right that follows the day you're reading. Route numbers are drawn like Icelandic road signs. */
+:root{
+  --bg:#EDF2F2; --surface:#FFFFFF; --surface-2:#F5F8F8; --ink:#15201F; --muted:#56696A; --line:#CCD8D9;
+  --glacier:#1C7385; --glacier-soft:#D6EBEF; --sign:#1B4E9F; --sign-fg:#FFFFFF;
+  --moss:#4F7231; --moss-soft:#E3EDD6; --lava:#B9461F; --lava-soft:#F7E2D8; --land:#DCE6DF; --sea:#E4EEF1;
+  --f-display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --f-head:"Noto Serif TC","Songti TC","PMingLiU",serif;
+  --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1516; --surface:#162122; --surface-2:#1B2829; --ink:#E3ECEC; --muted:#94A7A8; --line:#2B3B3D;
+  --glacier:#5CC2D3; --glacier-soft:#163A41; --sign:#3F78D6; --sign-fg:#FFFFFF;
+  --moss:#9DC06F; --moss-soft:#26331B; --lava:#F08B60; --lava-soft:#3D2219; --land:#22302C; --sea:#132024; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1516; --surface:#162122; --surface-2:#1B2829; --ink:#E3ECEC; --muted:#94A7A8; --line:#2B3B3D;
+  --glacier:#5CC2D3; --glacier-soft:#163A41; --sign:#3F78D6; --sign-fg:#FFFFFF;
+  --moss:#9DC06F; --moss-soft:#26331B; --lava:#F08B60; --lava-soft:#3D2219; --land:#22302C; --sea:#132024; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.7}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+a{color:var(--glacier)}
+a:focus-visible,button:focus-visible,input:focus-visible,label:focus-within{outline:2px solid var(--glacier);outline-offset:2px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-head);text-wrap:balance;margin:0;line-height:1.25}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--surface);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:20px;padding-block:10px;overflow-x:auto}
+.brand{font-family:var(--f-display);font-weight:800;font-size:22px;letter-spacing:.04em;white-space:nowrap;color:var(--ink);text-decoration:none}
+.nav a.lnk{color:var(--muted);text-decoration:none;font-size:14px;white-space:nowrap}
+.nav a.lnk:hover{color:var(--ink)}
+
+/* hero */
+.hero{padding-block:40px 28px}
+.hero .eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--glacier)}
+.hero h1{font-size:clamp(34px,6vw,60px);font-weight:900;margin-top:8px}
+.hero p.lede{max-width:62ch;color:var(--muted);margin:12px 0 0}
+.controls{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:16px;margin-top:28px}
+@media (max-width:860px){.controls{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px}
+.panel h3{font-family:var(--f-body);font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-bottom:12px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:8px;cursor:pointer;background:var(--surface-2)}
+.opt input{margin-top:5px;accent-color:var(--glacier)}
+.opt b{display:block;font-size:14px}
+.opt span{font-size:12.5px;color:var(--muted);line-height:1.5}
+.opt.on{border-color:var(--glacier);background:var(--glacier-soft)}
+.opt.dis{opacity:.5;cursor:not-allowed}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.stat{padding:8px 0}
+.stat .v{font-family:var(--f-display);font-weight:800;font-size:40px;line-height:1}
+.stat .k{font-size:12px;color:var(--muted)}
+.field{display:flex;flex-direction:column;gap:4px;margin-top:14px;font-size:13px;color:var(--muted)}
+.field input{font:inherit;color:var(--ink);background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:7px 10px}
+
+/* main grid */
+.main{display:grid;grid-template-columns:minmax(0,1fr) 440px;gap:28px;align-items:start;padding-block:12px 40px}
+@media (max-width:960px){.main{grid-template-columns:1fr}.mapcol{order:-1}}
+.mapcol{position:sticky;top:calc(env(safe-area-inset-top,0px) + 64px)}
+@media (max-width:960px){.mapcol{position:static}}
+.mapcard{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px}
+.mapcard svg{display:block;width:100%;height:auto}
+.maphead{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:6px}
+.maphead b{font-family:var(--f-display);font-size:24px;font-weight:800;letter-spacing:.03em}
+.maphead span{font-size:13px;color:var(--muted)}
+.land{fill:var(--land);stroke:var(--line);stroke-width:1}
+.seabg{fill:var(--sea)}
+.seg{fill:none;stroke:var(--muted);stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round;opacity:.45;stroke-dasharray:4 3}
+.seg.on{stroke:var(--lava);stroke-width:3.4;opacity:1;stroke-dasharray:none}
+.dot{fill:var(--surface);stroke:var(--muted);stroke-width:1.2}
+.dot.on{fill:var(--lava);stroke:var(--surface);stroke-width:1.5}
+.town{font-family:var(--f-mono);font-size:9px;fill:var(--muted)}
+.lbl{font-family:var(--f-body);font-size:10.5px;font-weight:700;fill:var(--ink);paint-order:stroke;stroke:var(--land);stroke-width:3px}
+.daystrip{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.daystrip button{font-family:var(--f-display);font-weight:800;font-size:15px;min-width:34px;padding:3px 6px;border-radius:5px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);cursor:pointer}
+.daystrip button.opt-d{border-style:dashed}
+.daystrip button.on{background:var(--lava);border-color:var(--lava);color:var(--surface)}
+
+/* day cards */
+.days{display:flex;flex-direction:column;gap:18px}
+.day{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 22px;scroll-margin-top:80px;transition:border-color .2s}
+.day.on{border-color:var(--lava)}
+.day.extra{border-style:dashed}
+.dhead{display:flex;gap:16px;align-items:flex-start}
+.dnum{font-family:var(--f-display);font-weight:800;line-height:.9;text-align:center;min-width:64px}
+.dnum small{display:block;font-size:12px;letter-spacing:.18em;color:var(--muted)}
+.dnum strong{display:block;font-size:52px}
+.dnum em{display:block;font-style:normal;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-top:4px}
+.dtitle{flex:1;min-width:0}
+.dtitle h2{font-size:22px;font-weight:900}
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px;font-size:13px;color:var(--muted)}
+.road{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:22px;padding:0 6px;background:var(--sign);color:var(--sign-fg);font-family:var(--f-display);font-weight:800;font-size:15px;border-radius:3px;box-shadow:inset 0 0 0 1.5px var(--sign),inset 0 0 0 3px var(--sign-fg)}
+.tag{font-size:11.5px;padding:1px 8px;border-radius:99px;background:var(--glacier-soft);color:var(--glacier);font-weight:700}
+.tag.x{background:var(--lava-soft);color:var(--lava)}
+.route{font-size:14px;color:var(--ink);margin-top:6px}
+.stops{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:0;counter-reset:s}
+.stops li{position:relative;padding:0 0 14px 34px;counter-increment:s}
+.stops li::before{content:counter(s);position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:50%;background:var(--surface-2);border:1.5px solid var(--glacier);color:var(--glacier);font-family:var(--f-mono);font-size:11px;font-weight:600;display:grid;place-items:center}
+.stops li::after{content:"";position:absolute;left:10.5px;top:26px;bottom:2px;width:1px;background:var(--line)}
+.stops li:last-child{padding-bottom:0}
+.stops li:last-child::after{display:none}
+.stops b{font-weight:700}
+.stops .en{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-left:6px}
+.stops p{margin:2px 0 0;font-size:13.5px;color:var(--muted)}
+.price{font-family:var(--f-mono);font-size:12px;color:var(--moss);margin-left:6px;white-space:nowrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+@media (max-width:600px){.grid2{grid-template-columns:1fr}.dnum{min-width:48px}.dnum strong{font-size:40px}.day{padding:16px}}
+.box{background:var(--surface-2);border-radius:8px;padding:12px 14px;min-width:0}
+.box h4{margin:0 0 4px;font-size:12px;letter-spacing:.1em;color:var(--muted);font-weight:700}
+.box p{margin:0;font-size:14px}
+.box ul{margin:0;padding-left:18px;font-size:14px}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.links a{font-size:13px;text-decoration:none;border:1px solid var(--line);border-radius:6px;padding:4px 10px;background:var(--surface)}
+.links a:hover{border-color:var(--glacier)}
+.tip{margin-top:14px;padding:10px 14px;border-left:3px solid var(--moss);background:var(--moss-soft);font-size:13.5px;border-radius:0 6px 6px 0}
+.tip.warn{border-left-color:var(--lava);background:var(--lava-soft)}
+
+/* sections */
+section.blk{padding-block:40px;border-top:1px solid var(--line)}
+section.blk>.wrap>h2{font-size:30px;font-weight:900}
+section.blk>.wrap>p.sub{color:var(--muted);margin:6px 0 20px;max-width:65ch}
+.checks{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px}
+.ck{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;background:var(--surface);border:1px solid var(--line);border-radius:8px;cursor:pointer;font-size:14px}
+.ck input{margin-top:5px;accent-color:var(--moss);width:16px;height:16px}
+.ck small{display:block;color:var(--muted);font-size:12px}
+.ck.done span>b{text-decoration:line-through;color:var(--muted)}
+.progress{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:16px;max-width:420px}
+.progress i{display:block;height:100%;background:var(--moss);transition:width .3s}
+.budget{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+@media (max-width:800px){.budget{grid-template-columns:1fr}}
+.binputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 14px}
+.bacts{display:flex;flex-direction:column;gap:6px;margin-top:14px}
+.bacts label{display:flex;gap:8px;align-items:center;font-size:14px}
+.bacts label .num{margin-left:auto;color:var(--muted);font-size:12.5px}
+table.btab{width:100%;border-collapse:collapse;font-size:14px}
+table.btab td{padding:8px 0;border-bottom:1px solid var(--line)}
+table.btab td:last-child{text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+table.btab tr.total td{border-bottom:none;font-weight:700;font-size:16px;padding-top:14px}
+.twd{font-family:var(--f-display);font-weight:800;font-size:48px;line-height:1;margin-top:8px;color:var(--glacier)}
+.note{font-size:12.5px;color:var(--muted);margin-top:10px}
+.tips{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.tcard{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px}
+.tcard h3{font-size:18px;margin-bottom:8px}
+.tcard ul{margin:0;padding-left:18px;font-size:14px}
+.tcard li{margin-bottom:4px}
+/* timeline */
+.ghead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 16px;margin-bottom:10px}
+.ghead h3{margin:0}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--muted)}
+.lg{display:inline-block;width:16px;height:10px;border-radius:2px;margin-right:5px;vertical-align:middle}
+.lg.drive,.tl i.drive{background:repeating-linear-gradient(135deg,var(--muted) 0 2px,transparent 2px 6px)}
+.lg.drive{opacity:.6;border:1px solid var(--line)}
+.lg.stop{background:var(--glacier)}
+.lg.meal{background:var(--moss)}
+.tl{position:relative;height:22px;background:var(--surface-2);border-radius:4px;overflow:hidden}
+.tl i{position:absolute;top:0;bottom:0;display:grid;place-items:center;font-style:normal;font-family:var(--f-mono);font-size:10px;font-weight:600;color:var(--surface)}
+.tl i.drive{opacity:.5}
+.tl i.stop{background:var(--glacier);box-shadow:inset 1px 0 0 var(--surface)}
+.tl i.stop.meal{background:var(--moss)}
+.axis{position:relative;height:16px;font-family:var(--f-mono);font-size:10px;color:var(--muted)}
+.axis span{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap}
+.axis span:first-child{transform:none}
+.axis span:last-child{transform:translateX(-100%)}
+.gantt{display:flex;flex-direction:column;gap:4px}
+.grow{display:grid;grid-template-columns:minmax(0,210px) minmax(0,1fr) 46px;gap:10px;align-items:center;padding:2px 4px;border-radius:6px}
+.grow[data-i]{cursor:pointer}
+.grow[data-i]:hover{background:var(--surface-2)}
+.grow.on{background:var(--lava-soft)}
+.grow b{font-family:var(--f-display);font-weight:800;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.grow b .gt{font-family:var(--f-body);font-weight:500;font-size:12.5px;color:var(--muted);margin-left:8px}
+.grow.x b{color:var(--glacier)}
+.grow>.num{font-size:12px;color:var(--muted);text-align:right}
+@media (max-width:700px){.grow{grid-template-columns:34px minmax(0,1fr) 42px;gap:6px}.grow b .gt{display:none}}
+.dbar{margin-top:14px}
+.leg{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);margin:-2px 0 4px}
+.when{font-size:12.5px;color:var(--muted);margin-top:1px}
+.clk{font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-weight:600;color:var(--glacier);margin-right:8px}
+.eta{font-size:12.5px;color:var(--muted);margin-top:4px!important}
+footer{padding-block:28px;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="wrap">
+  <a class="brand" href="#top">ÍSLAND · RING ROAD</a>
+  <a class="lnk" href="#timeline">時間軸</a>
+  <a class="lnk" href="#itinerary">每日行程</a>
+  <a class="lnk" href="#bookings">預訂清單</a>
+  <a class="lnk" href="#budget">預算試算</a>
+  <a class="lnk" href="#tips">自駕攻略</a>
+</div></nav>
+
+<header class="hero wrap" id="top">
+  <div class="eyebrow">2027 年 6 月中下旬 · 一家五口 · Route 1 逆時針環島</div>
+  <h1>冰島環島自駕手冊</h1>
+  <p class="lede">以 12 天為骨架的 1 號公路環島行程，走南岸瀑布、冰河湖、東部峽灣、米湖地熱區，再繞斯奈山半島與黃金圈回到雷克雅維克。下方可加選 0–3 天，拉長成 13–15 天，地圖、里程、預訂清單與預算會跟著更新。</p>
+
+  <div class="controls">
+    <div class="panel">
+      <h3>加選天數（最多 3 天）</h3>
+      <div class="opts" id="opts"></div>
+    </div>
+    <div class="panel">
+      <h3>行程概覽</h3>
+      <div class="stats">
+        <div class="stat"><div class="v" id="sDays">12</div><div class="k">天</div></div>
+        <div class="stat"><div class="v" id="sNights">11</div><div class="k">晚住宿</div></div>
+        <div class="stat"><div class="v" id="sKm">2225</div><div class="k">公里（估）</div></div>
+        <div class="stat"><div class="v" id="sDrive">40</div><div class="k">小時車程</div></div>
+      </div>
+      <label class="field" for="startDate">出發日期（抵達 KEF 當天）
+        <input type="date" id="startDate" value="2027-06-16">
+      </label>
+    </div>
+  </div>
+</header>
+
+<section class="wrap" id="timeline" style="padding-bottom:20px">
+  <div class="panel">
+    <div class="ghead"><h3>每日時間軸</h3>
+      <div class="legend"><span><i class="lg drive"></i>開車</span><span><i class="lg stop"></i>景點停留</span><span><i class="lg meal"></i>含用餐</span></div></div>
+    <div class="gantt" id="gantt"></div>
+    <div class="note">色塊內數字為當天第幾站，右欄為預計抵達住宿的時間。時間為估算，未含加油、路邊拍照與天候延誤；冬季每段車程建議多抓 20–30%。點任一列可跳到當天。</div>
+  </div>
+</section>
+
+<div class="wrap main" id="itinerary">
+  <div class="days" id="days"></div>
+  <aside class="mapcol">
+    <div class="mapcard">
+      <div class="maphead"><b id="mapDay">DAY 1</b><span id="mapKm"></span></div>
+      <svg id="map" viewBox="0 0 500 352" role="img" aria-label="冰島環島路線示意圖"></svg>
+      <div class="daystrip" id="strip"></div>
+    </div>
+  </aside>
+</div>
+
+
+<section class="blk" id="bookings"><div class="wrap">
+  <h2>預訂清單</h2>
+  <p class="sub">依目前選的天數自動列出要先訂的東西。打勾會記在這台裝置的瀏覽器裡。夏季（6–8 月）住宿與熱門行程常提前 3–6 個月額滿。</p>
+  <div class="progress"><i id="prog" style="width:0"></i></div>
+  <div class="checks" id="checks"></div>
+</div></section>
+
+<section class="blk" id="budget"><div class="wrap">
+  <h2>預算試算</h2>
+  <p class="sub">數字皆為估算預設值，請依實際報價修改。住宿與租車以「整組」計，餐飲與門票以「每人」計。</p>
+  <div class="budget">
+    <div class="panel">
+      <div class="binputs">
+        <label class="field" for="bPeople">人數（付費門票）<input type="number" id="bPeople" min="1" value="5"></label>
+        <label class="field" for="bRate">匯率：1 ISK ≈ TWD<input type="number" id="bRate" step="0.01" value="0.23"></label>
+        <label class="field" for="bCar">租車＋保險／天（7 座 SUV，ISK）<input type="number" id="bCar" step="1000" value="45000"></label>
+        <label class="field" for="bStay">住宿／晚（5 人，ISK）<input type="number" id="bStay" step="1000" value="65000"></label>
+        <label class="field" for="bFood">餐飲／人／天（ISK）<input type="number" id="bFood" step="500" value="7000"></label>
+        <label class="field" for="bFuelP">油價／公升（ISK）<input type="number" id="bFuelP" step="5" value="320"></label>
+        <label class="field" for="bFuelC">油耗 L／100 km<input type="number" id="bFuelC" step="0.5" value="11"></label>
+      </div>
+      <div class="bacts" id="bacts"></div>
+    </div>
+    <div class="panel">
+      <table class="btab" id="btab"></table>
+      <div class="twd" id="bTwd"></div>
+      <div class="note">不含機票。冰島物價約為台灣的 2–3 倍；超市自煮、加油站熱狗（pylsur）與湯麵包能大幅省餐費。</div>
+    </div>
+  </div>
+</div></section>
+
+<section class="blk" id="tips"><div class="wrap">
+  <h2>自駕攻略</h2>
+  <p class="sub">出發前看一遍，路上遇到狀況再回來查。</p>
+  <div class="tips">
+    <div class="tcard"><h3>6 月・一家五口</h3><ul>
+      <li><b>永晝</b>：6 月中下旬日落接近午夜、凌晨 3 點就天亮，天不會全黑，每人帶眼罩。</li>
+      <li>看不到極光、去不了藍冰洞；換來的是賞鯨、海鸚鵡、道路全開的季節。</li>
+      <li>6/17 是冰島國慶日，雷克雅維克有遊行，部分商店休息。</li>
+      <li>氣溫約 8–15°C、風大，用洋蔥式穿法；米湖 6 月蠓蟲最多，帶防蚊頭網。</li>
+      <li><b>車</b>：5 個大人加 5 件大行李，選 7 座 SUV（第三排放倒）或 9 人座 Van，登記 2–3 位駕駛。</li>
+      <li><b>住宿</b>：很多房型最多住 4 人，訂房時篩「5 位成人」，找家庭房、公寓或整棟小屋。</li>
+      <li>6 月是旺季，住宿、Silfra、賞鯨請盡早預訂。</li>
+    </ul></div>
+    <div class="tcard"><h3>開車規則</h3><ul>
+      <li>1 號公路全長約 1,330 km，全線鋪面；速限鋪面 90、碎石路 80、市區 50 km/h，測速照相很多。</li>
+      <li>一般二驅車不可開 F 開頭的高地道路，違規不保險。</li>
+      <li>單線橋（Einbreið brú）先到先過，看到對向車已上橋就等。</li>
+      <li>不可在路肩隨意停車拍照，找有 P 標誌的停車點。</li>
+      <li>加油站多為自助，信用卡需 4 碼 PIN；也可在 N1、Olís 買預付加油卡。</li>
+    </ul></div>
+    <div class="tcard"><h3>天氣與路況</h3><ul>
+      <li><a href="https://www.vedur.is/" target="_blank" rel="noopener">vedur.is</a> 看天氣與風速；風速超過 20 m/s 要考慮改期。</li>
+      <li><a href="https://umferdin.is/en" target="_blank" rel="noopener">umferdin.is</a>（原 road.is）看即時封路，每天出發前查。</li>
+      <li><a href="https://safetravel.is/" target="_blank" rel="noopener">safetravel.is</a> 可登記行程並收警報。</li>
+      <li>強風時開車門要雙手抓緊，車門被風吹壞通常不在保險範圍。</li>
+      <li>南岸沙塵與碎石多，建議加保 GP（碎石）與 SAAP（沙塵）險。</li>
+    </ul></div>
+    <div class="tcard"><h3>季節怎麼選</h3><ul>
+      <li><b>6–8 月</b>：永晝、道路全開、最適合第一次環島，也最貴。</li>
+      <li><b>9–10 月</b>：開始有極光，人潮少，但天氣轉差。</li>
+      <li><b>11–3 月</b>：藍冰洞季、極光季；12 月日照僅 4–5 小時，每天車程要縮短，東部 939 Öxi 山路封閉。</li>
+      <li>冬季請租四驅並配釘胎，北部與東部常有路面結冰。</li>
+    </ul></div>
+    <div class="tcard"><h3>買酒、超市、好市多</h3><ul>
+      <li>超市買不到一般酒類，只能到國營 <b>Vínbúðin</b>，營業時間短、週日多休。入境 KEF 免稅店最便宜，落地先買。</li>
+      <li>超市選 <b>Bónus</b>（粉紅小豬）最便宜，其次 Krónan、Nettó。</li>
+      <li>Costco 在 Garðabær，台灣會員卡可用，加油也較便宜。</li>
+    </ul></div>
+    <div class="tcard"><h3>退稅與伴手禮</h3><ul>
+      <li>同一店家單張收據含稅滿 <b>6,000 ISK</b> 可退稅，請店家開退稅單，於出境 KEF 時辦理，購買後 90 天內須離境。</li>
+      <li>必買：Omnom 巧克力、甘草巧克力（Draumur、Þristur）、管裝魚子醬抹醬（長得像牙膏，可帶回台灣）、Saltverk 海鹽、羊毛衫 lopapeysa。</li>
+    </ul></div>
+    <div class="tcard"><h3>機票與廉航</h3><ul>
+      <li>參考行程搭的 PLAY 已於 2025 年 9 月停飛；歐洲轉機進冰島可比較 Icelandair、easyJet、Wizz Air 等。</li>
+      <li>廉航基本票通常不含大件手提與托運，訂票時加購行李比機場臨櫃便宜，尺寸與重量要看清楚。</li>
+      <li>租車比價：<a href="https://www.rentalcars.com/" target="_blank" rel="noopener">rentalcars.com</a>；5 人同行可登記 2–3 位駕駛輪流開。</li>
+    </ul></div>
+    <div class="tcard"><h3>省錢與安全</h3><ul>
+      <li>早餐、午餐用超市食材自理，晚餐再上館子，餐費可省一半。</li>
+      <li>冰島自來水可直接生飲，帶水壺就不用買瓶裝水。</li>
+      <li>第 9 天（北部→斯奈山）車程最長，多位駕駛輪流開，每 2 小時停一次。</li>
+      <li>緊急電話 112；藥局叫 Apótek，主要城鎮都有。</li>
+    </ul></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">行程參考 YouTube「冰島自駕 12 天」系列 EP1–EP8 整理。里程、時間、票價皆為估算，出發前請以官方網站與即時路況為準。</div></footer>
+
+<script>
+const bk = q => 'https://www.booking.com/searchresults.zh-tw.html?ss=' + encodeURIComponent(q) + '&group_adults=5';
+const LL = {
+  KEF:[63.985,-22.605], RVK:[64.146,-21.94], VIK:[63.419,-19.006], BIKE:[63.87,-18.03], HOFN:[64.254,-15.212],
+  BRAG:[64.72,-14.5], EGS:[65.265,-14.395], MYV:[65.645,-16.91], BREI:[65.73,-17.38], AKU:[65.683,-18.09],
+  SNAE:[64.86,-22.95], GOLD:[64.03,-20.55]
+};
+
+const BASE = [
+ {id:'d1', title:'抵達凱夫拉維克・藍湖溫泉', roads:['41','43'], km:70, hrs:'1 小時', end:'RVK', stay:'雷克雅維克',
+  stops:[
+   {n:'KEF 機場取車', en:'Keflavík Airport', ll:LL.KEF, p:'入境大廳的免稅店先買酒，冰島超市買不到。'},
+   {n:'藍湖溫泉', en:'Blue Lagoon', ll:[63.880,-22.449], p:'需預約入場時段。矽泥會讓頭髮乾澀打結，下水前抹潤髮乳，頭髮盡量不要泡水。', act:'bl', price:12000},
+   {n:'雷克雅維克', en:'Reykjavík', ll:LL.RVK, p:'入住後到超市補給早餐。'}],
+  food:['Íslenski barinn（冰島傳統菜，可以試海鸚鵡）'],
+  links:[['藍湖官網','https://www.bluelagoon.com/'],['雷克雅維克住宿',bk('Reykjavik')]],
+  tip:'長途飛行後第一天別排太滿。藍湖離機場約 20 分鐘，最適合放在抵達日或離境日。'},
+
+ {id:'d2', title:'南岸瀑布大道・黑沙灘', roads:['1'], km:190, hrs:'2.5 小時', end:'VIK', stay:'維克 Vík',
+  stops:[
+   {n:'鱒魚瀑布', en:'Urriðafoss', ll:[63.925,-20.67], p:'冰島水量最大的瀑布之一，就在 1 號公路旁。'},
+   {n:'塞里雅蘭瀑布', en:'Seljalandsfoss', ll:[63.616,-19.989], p:'可以走到瀑布後方，帶雨衣。旁邊步行 10 分鐘還有隱藏瀑布 Gljúfrabúi。'},
+   {n:'史可加瀑布', en:'Skógafoss', ll:[63.532,-19.511], p:'晴天常有彩虹，右側階梯可上到頂端觀景台。'},
+   {n:'維克教堂', en:'Víkurkirkja', ll:[63.42,-19.01], p:'小鎮制高點，紅頂白教堂俯瞰整個海岸。'},
+   {n:'黑沙灘', en:'Reynisfjara', ll:[63.404,-19.045], p:'玄武岩柱與海蝕柱，6 月崖壁上常有海鸚鵡。瘋狗浪（sneaker waves）每年都出事，遠離水邊、注意現場警示燈。'}],
+  food:['The Soup Company（維克，熱湯配麵包）'],
+  links:[['維克住宿',bk('Vík í Mýrdal')]],
+  tip:'南岸風很大，下車前先確認車門方向，避免被風甩開。'},
+
+ {id:'d3', title:'羽毛河峽谷・入住峽谷農場', roads:['1','206'], km:100, hrs:'1.5 小時', end:'BIKE', stay:'Iceland Bike Farm（峽谷秘境）',
+  stops:[
+   {n:'羽毛河峽谷', en:'Fjaðrárgljúfur', ll:[63.771,-18.172], p:'沿峽谷邊步道往上走約 2 km，有多個觀景台。保育期間可能封閉，出發前查。'},
+   {n:'Iceland Bike Farm', en:'Mörtunga', ll:LL.BIKE, p:'藏在峽谷裡的農場小屋，最後一段是碎石路，慢慢開。'}],
+  food:['Kirkjubæjarklaustur 小鎮超市補給，農場可自炊'],
+  links:[['Iceland Bike Farm 訂房','https://www.icelandbikefarm.is/book-now']],
+  tip:'這天車程短，峽谷步道可以一路走到最上方觀景台，下午留在農場放鬆。'},
+
+ {id:'d4', title:'冰河國家公園・冰河湖・鑽石沙灘', roads:['1'], km:230, hrs:'3 小時', end:'HOFN', stay:'赫本 Höfn',
+  stops:[
+   {n:'斯瓦蒂佛斯（黑瀑布）', en:'Svartifoss · Skaftafell', ll:[64.028,-16.975], p:'玄武岩柱環繞的瀑布，從遊客中心來回約 1.5 小時，上坡多。'},
+   {n:'冰河湖', en:'Jökulsárlón', ll:[64.048,-16.179], p:'湖上漂著冰山，常有海豹。可搭水陸兩用船或 Zodiac 快艇。'},
+   {n:'鑽石冰沙灘', en:'Diamond Beach', ll:[64.044,-16.177], p:'冰塊沖上黑沙灘，就在冰河湖對面。日出時最美。'},
+   {n:'赫本', en:'Höfn', ll:LL.HOFN, p:'冰島龍蝦（海螯蝦）產地。'}],
+  food:['Pakkhús Restaurant（赫本，龍蝦料理）'],
+  links:[['赫本住宿',bk('Höfn')]],
+  tip:'1 號公路沿線就看得到好幾條冰舌，例如 Svínafellsjökull，路邊停車點即可近看。'},
+
+ {id:'d5', title:'東部峽灣・海港的蛋', roads:['1'], km:115, hrs:'1.5 小時', end:'BRAG', stay:'Bragðavellir Cottages',
+  stops:[
+   {n:'奇妙的蛋', en:'Eggin í Gleðivík · Djúpivogur', ll:[64.656,-14.285], p:'34 顆石雕鳥蛋沿著港邊排開，代表當地 34 種鳥。'},
+   {n:'Bragðavellir Cottages', en:'Hamarsfjörður', ll:LL.BRAG, p:'峽灣旁的小木屋，晚上有機會看到極光（秋冬）。'}],
+  food:['Djúpivogur 港邊咖啡館'],
+  links:[['Bragðavellir 住宿',bk('Bragðavellir Cottages')]],
+  tip:'東部峽灣路線沿海蜿蜒，開不快，但幾乎每個彎都是風景。'},
+
+ {id:'d6', title:'白日夢公路・白日夢小鎮・黛提瀑布', roads:['1','93','862'], km:350, hrs:'4 小時', end:'MYV', stay:'米湖 Mývatn 周邊',
+  stops:[
+   {n:'93 號公路', en:'Route 93 · Fjarðarheiði', ll:[65.24,-14.2], p:'《白日夢冒險王》滑板片段的拍攝公路，翻過山口就是峽灣。'},
+   {n:'白日夢小鎮', en:'Seyðisfjörður', ll:[65.26,-14.01], p:'彩虹步道與藍色教堂，小鎮很好逛。'},
+   {n:'黛提瀑布', en:'Dettifoss', ll:[65.814,-16.385], p:'歐洲水量最大的瀑布之一。走 862 號鋪面路到西岸停車場，步行約 15 分鐘。'},
+   {n:'地熱谷', en:'Námafjall · Hverir', ll:[65.641,-16.81], p:'冒泡泥漿池與噴氣孔，硫磺味很重。只能走在步道內。'}],
+  food:['Askur Pizzeria（埃伊爾斯塔濟 Egilsstaðir）'],
+  links:[['米湖住宿',bk('Mývatn')]],
+  tip:'Egilsstaðir 是東部最大城，加油、超市補給都在這裡完成，接下來到米湖之間 165 km 幾乎沒有加油站。'},
+
+ {id:'d7', title:'米湖火山地形・米湖溫泉', roads:['1','848'], km:70, hrs:'1 小時', end:'BREI', stay:'Breiðamýri Farm Apartments',
+  stops:[
+   {n:'神秘洞穴溫泉', en:'Grjótagjá', ll:[65.626,-16.883], p:'裂縫中的地下溫泉，現在禁止下水，可看可拍。'},
+   {n:'惠爾山偽火山口', en:'Hverfjall', ll:[65.605,-16.871], p:'步道上到火山口邊緣約 20–30 分鐘，可以繞口一圈。'},
+   {n:'偽火山口群', en:'Skútustaðagígar', ll:[65.566,-17.04], p:'熔岩流過濕地蒸汽爆炸形成，環湖步道平坦好走。'},
+   {n:'米湖溫泉', en:'Mývatn Nature Baths', ll:[65.631,-16.848], p:'比藍湖便宜、人少。池子看出去就是米湖與火山地形。', act:'mv', price:7500}],
+  food:['Vogafjós Farm Resort（牛舍旁邊吃午餐）','Skútaís（農場冰淇淋）'],
+  links:[['米湖溫泉官網','https://myvatnnaturebaths.is/'],['Breiðamýri 住宿',bk('Breiðamýri Farm Apartments')]],
+  tip:'夏季米湖蚊蟲（蠓）很多，帶防蚊頭網。'},
+
+ {id:'d8', title:'胡薩維克賞鯨・眾神瀑布・阿克雷里', roads:['845','85','1'], km:140, hrs:'2 小時', end:'AKU', stay:'阿克雷里 Akureyri',
+  stops:[
+   {n:'胡薩維克賞鯨', en:'Húsavík whale watching', ll:[66.046,-17.338], p:'冰島賞鯨首選小鎮，6 月座頭鯨很常見。出海約 3 小時，海上很冷，業者會借保暖連身衣。', act:'whale', price:12500},
+   {n:'眾神瀑布', en:'Goðafoss', ll:[65.683,-17.55], p:'兩側都有停車場，東岸可走到瀑布邊。'},
+   {n:'阿克雷里', en:'Akureyri', ll:LL.AKU, p:'冰島第二大城，紅綠燈是愛心形狀。'}],
+  food:['Húsavík 港邊海鮮餐廳','阿克雷里 Brynja 冰淇淋'],
+  links:[['North Sailing 賞鯨','https://www.northsailing.is/'],['Gentle Giants 賞鯨','https://www.gentlegiants.is/'],['阿克雷里住宿',bk('Akureyri')]],
+  tip:'胡薩維克、黛提瀑布、眾神瀑布與米湖合稱「鑽石圈」，這兩天已走完大部分。5 人可包一艘小船或選大船較穩。'},
+
+ {id:'d9', title:'騎冰島馬・犀牛石・往西到斯奈山半島', roads:['1','711','54'], km:420, hrs:'5.5 小時', end:'SNAE', stay:'斯奈山半島森林民宿',
+  stops:[
+   {n:'騎冰島馬', en:'Horse riding · Skagafjörður', ll:[65.553,-19.45], p:'斯卡加峽灣是冰島馬的故鄉，1 號公路旁很多農場有 1–1.5 小時騎乘，初學者也能體驗冰島馬特有的 tölt 步法。', act:'horse', price:14000},
+   {n:'犀牛石', en:'Hvítserkur', ll:[65.606,-20.636], p:'海中 15 公尺高的玄武岩，像在喝水的犀牛。711 號是碎石路。'},
+   {n:'Bónus 超市補給', en:'Bónus', ll:null, p:'冰島最便宜的超市，物價其實沒想像中誇張。'}],
+  food:['Hjá Góðu Fólki（參考影片的午餐）'],
+  links:[['搜尋騎馬體驗（GetYourGuide）','https://www.getyourguide.com/s/?q=Skagafjordur%20horse%20riding'],['斯奈山住宿',bk('Snæfellsnes')],['Airbnb 斯奈山','https://www.airbnb.com.tw/s/Snaefellsnes--Iceland/homes']],
+  warn:true,
+  tip:'全程最長的一天，6 月天黑得晚不必趕，2–3 位駕駛輪流開。想放慢可在 Hvammstangi 或 Borgarnes 多住一晚。'},
+
+ {id:'d10', title:'斯奈山半島一圈・回雷克雅維克', roads:['54','574','1'], km:300, hrs:'4 小時', end:'RVK', stay:'雷克雅維克（Sif Apartments）',
+  stops:[
+   {n:'海豹沙灘', en:'Ytri Tunga', ll:[64.80,-23.08], p:'退潮時海豹會躺在岩石上，6–7 月最多。'},
+   {n:'瓦汀舍利爾熔岩洞', en:'Vatnshellir', ll:[64.75,-23.82], p:'需參加導覽下到地底 35 公尺的熔岩管。', act:'vat', price:5500},
+   {n:'教會山', en:'Kirkjufell', ll:[64.941,-23.305], p:'冰島最常入鏡的山，搭配前方小瀑布 Kirkjufellsfoss。'},
+   {n:'雷克雅維克市區', en:'Reykjavík', ll:LL.RVK, p:'入住後到市區散步、吃晚餐，6 月晚上 10 點天還很亮。'}],
+  food:['Mæstro（雷克雅維克街頭小吃）'],
+  links:[['Sif Apartments',bk('Sif Apartments Reykjavik')]],
+  tip:'斯奈山半島號稱「冰島縮影」，冰河、熔岩、海岸一次看齊。'},
+
+ {id:'d11', title:'黃金圈・Silfra 板塊裂縫浮潛', roads:['36','37','35'], km:220, hrs:'3 小時', end:'GOLD', stay:'黃金圈周邊（Selfoss / Flúðir）',
+  stops:[
+   {n:'史費拉裂縫浮潛', en:'Silfra · Þingvellir', ll:[64.256,-21.12], p:'在北美與歐亞板塊之間浮潛，水溫約 2°C，穿乾式防寒衣。須會游泳，部分業者要求填健康聲明。', act:'silfra', price:28000},
+   {n:'藍色秘境瀑布', en:'Brúarfoss', ll:[64.264,-20.516], p:'冰藍色的水，停車場步行約 5 分鐘。'},
+   {n:'蓋錫爾間歇泉', en:'Geysir · Strokkur', ll:[64.31,-20.30], p:'Strokkur 每 5–10 分鐘噴發一次。'},
+   {n:'黃金瀑布', en:'Gullfoss', ll:[64.327,-20.121], p:'兩段式大瀑布，水氣很大，穿防水外套。'}],
+  food:['Friðheimar 番茄溫室餐廳（需訂位）'],
+  links:[['DIVE.IS（Silfra 浮潛）','https://www.dive.is/'],['Arctic Adventures（Silfra 浮潛）','https://adventures.is/'],['黃金圈住宿',bk('Golden Circle Iceland')]],
+  tip:'Silfra 早上第一梯人最少、水最清。浮潛後身體很冷，帶保溫瓶裝熱飲。'},
+
+ {id:'d12', title:'火口湖・溫泉河谷・好市多・離境', roads:['35','1','41'], km:150, hrs:'2 小時', end:'KEF', stay:'—（搭機離境）',
+  stops:[
+   {n:'火口湖', en:'Kerið', ll:[64.041,-20.885], p:'紅色火山渣環繞的翠綠火口湖，需購票入場。'},
+   {n:'溫泉河谷健行', en:'Reykjadalur · Hveragerði', ll:[64.02,-21.21], p:'單程約 3 km 上坡步道，終點是可以直接泡的溫泉河。帶泳衣、毛巾。'},
+   {n:'冰島好市多', en:'Costco Garðabær', ll:[64.07,-21.92], p:'台灣會員卡可用，順便把油加滿還車。'},
+   {n:'KEF 退稅・還車', en:'Keflavík Airport', ll:LL.KEF, p:'退稅單在出境前辦理，還車預留檢查時間。'}],
+  food:['Bæjarins Beztu Pylsur（熱狗攤）'],
+  links:[['KEF 機場','https://www.kefairport.is/']],
+  tip:'班機若在下午 5 點前，跳過溫泉河谷直接去好市多。伴手禮：Omnom 巧克力、甘草巧克力、管裝魚子醬、Saltverk 海鹽、羊毛製品。'}
+];
+
+const OPTS = [
+ {id:'oR', after:'d1', label:'雷克雅維克市區＋天空瀉湖', short:'抵達後多休一天，逛市區、泡 Sky Lagoon，調時差。',
+  title:'雷克雅維克慢遊・天空瀉湖', roads:['40'], km:40, hrs:'0.5 小時', end:'RVK', stay:'雷克雅維克',
+  stops:[
+   {n:'哈爾格林姆教堂', en:'Hallgrímskirkja', ll:[64.142,-21.927], p:'塔頂可看整座彩色屋頂城市。'},
+   {n:'哈帕音樂廳・太陽航海者', en:'Harpa · Sólfar', ll:[64.150,-21.932], p:'沿海步道一路走過去。'},
+   {n:'天空瀉湖', en:'Sky Lagoon', ll:[64.116,-21.97], p:'無邊際溫泉面向海，七步驟 SPA 儀式。', act:'sky', price:13000}],
+  food:['Íslenski barinn','Bæjarins Beztu Pylsur 熱狗'],
+  links:[['Sky Lagoon 官網','https://www.skylagoon.com/']],
+  tip:'這天放在抵達後，讓接下來的長途車程更有精神。'},
+ {id:'oA', after:'d2', label:'南岸多一天：冰河健行', short:'Sólheimajökull 冰河健行、Dyrhólaey 海鸚鵡。',
+  title:'冰河健行・海蝕拱門', roads:['1','221','218'], km:70, hrs:'1 小時', end:'VIK', stay:'維克 Vík（續住）',
+  stops:[
+   {n:'冰河健行', en:'Sólheimajökull', ll:[63.53,-19.37], p:'穿冰爪走上冰河，裝備由業者提供，穿防水登山鞋。', act:'glacier', price:15000},
+   {n:'海蝕拱門', en:'Dyrhólaey', ll:[63.40,-19.13], p:'5–8 月常見海鸚鵡在崖邊築巢，部分時段封閉保育。'}],
+  food:['Vík 小鎮 Black Crust Pizzeria'],
+  links:[['維克住宿',bk('Vík í Mýrdal')]],
+  tip:'續住同一間，不用每天搬行李。'},
+ {id:'oB', after:'d4', label:'冰河湖多一天：Zodiac 快艇', short:'6 月湖面無冰可開航，順遊菲雅冰河湖。',
+  title:'冰河湖快艇・菲雅冰河湖', roads:['1'], km:160, hrs:'2 小時', end:'HOFN', stay:'赫本 Höfn（續住）',
+  stops:[
+   {n:'冰河湖 Zodiac 快艇', en:'Jökulsárlón Zodiac', ll:[64.048,-16.179], p:'快艇可貼近冰山與冰河前緣，湖面無冰時（約 5–9 月）才開航。', act:'ice', price:16000},
+   {n:'菲雅冰河湖', en:'Fjallsárlón', ll:[64.01,-16.37], p:'比冰河湖小、人更少，冰川就在眼前。'},
+   {n:'鑽石冰沙灘日出', en:'Diamond Beach', ll:[64.044,-16.177], p:''}],
+  food:['Pakkhús Restaurant'],
+  links:[['赫本住宿',bk('Höfn')]],
+  tip:'藍冰洞只在 11–3 月，6 月去不了；夏季的冰河體驗選快艇或冰河健行。'},
+ {id:'oC', after:'d5', label:'東部多一天：玄武岩峽谷', short:'Stuðlagil 玄武岩峽谷、Hengifoss 紅條紋瀑布。',
+  title:'玄武岩峽谷・紅條紋瀑布', roads:['939','931','923'], km:220, hrs:'3 小時', end:'EGS', stay:'埃伊爾斯塔濟 Egilsstaðir',
+  stops:[
+   {n:'紅條紋瀑布', en:'Hengifoss', ll:[65.07,-14.88], p:'玄武岩夾紅色黏土層，健行來回約 2 小時。'},
+   {n:'玄武岩峽谷', en:'Stuðlagil', ll:[65.17,-15.30], p:'東岸步道可下到谷底，夏季河水呈藍綠色。'}],
+  food:['Askur Pizzeria'],
+  links:[['Egilsstaðir 住宿',bk('Egilsstaðir')]],
+  tip:'939 號 Öxi 山路是捷徑但為碎石陡坡，冬季封閉，可改走沿海 1 號公路。'}
+];
+OPTS.forEach(o => o.extra = true);
+
+/* ---------- timing: s = 出發時間；L = 每站 [從上一點開車分鐘, 停留分鐘, 備註]；e = 最後一站到住宿的車程；alt = 前一天是某加選日時第一段改用的車程 ---------- */
+const TIME = {
+  d1: {s:'13:00', L:[[0,45,'取車手續'],[20,180],[45,60,'超市補給・入住']], e:0},
+  d2: {s:'08:30', L:[[60,20],[50,75],[30,75,'含午餐'],[35,20],[10,60]], e:10},
+  d3: {s:'09:30', L:[[55,90],[35,0,'抵達入住']], e:0},
+  d4: {s:'08:30', L:[[75,120,'含野餐午餐'],[50,75],[5,40],[80,0,'抵達入住']], e:0},
+  d5: {s:'10:00', L:[[80,60,'含午餐'],[20,0,'抵達入住']], e:0},
+  d6: {s:'08:30', L:[[95,20],[15,90,'含午餐'],[155,60],[35,45]], e:10, alt:{oC:25}},
+  d7: {s:'09:30', L:[[10,30],[10,75],[20,90,'含 Vogafjós 午餐'],[20,120]], e:35},
+  d8: {s:'08:30', L:[[40,240,'含 3 小時出海＋午餐'],[45,45],[45,120,'逛街・晚餐']], e:0},
+  d9: {s:'08:00', L:[[75,120],[105,45,'帶三明治野餐'],[120,45,'超市補給']], e:75},
+  d10:{s:'09:00', L:[[20,45],[50,75],[55,75,'含午餐'],[150,90,'入住・晚餐']], e:0},
+  d11:{s:'08:00', L:[[50,180,'含裝備著裝'],[55,40],[20,75,'含午餐'],[10,60]], e:40},
+  d12:{s:'08:00', L:[[30,45],[25,180,'來回健行＋泡溫泉河'],[45,90,'含午餐'],[45,120,'還車・退稅・報到']], e:0},
+  oR: {s:'10:00', L:[[10,60],[15,90,'含午餐'],[15,150]], e:15},
+  oA: {s:'09:00', L:[[30,180],[25,60]], e:15},
+  oB: {s:'09:00', L:[[75,150],[10,75,'含午餐'],[10,45]], e:80},
+  oC: {s:'09:00', L:[[100,150,'含午餐'],[40,120]], e:50}
+};
+let SCH = [], AX0 = 420, AX1 = 1260;
+const toMin = s => { const [h, m] = s.split(':').map(Number); return h * 60 + m; };
+const hm = m => `${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')}`;
+const dur = m => m < 60 ? `${m} 分` : `${Math.floor(m / 60)} 小時${m % 60 ? ' ' + (m % 60) + ' 分' : ''}`;
+
+function sched(d, prevId){
+  const t = TIME[d.id];
+  let m = toMin(t.s), drive = 0, visit = 0;
+  const start = m, segs = [], at = [];
+  t.L.forEach((l, k) => {
+    const dr = k === 0 && t.alt && prevId in t.alt ? t.alt[prevId] : l[0];
+    if (dr) { segs.push({type:'drive', a:m, b:m + dr}); m += dr; drive += dr; }
+    const g = {a:m, b:m + l[1], stay:l[1], dr, note:l[2] || ''};
+    at.push(g);
+    if (l[1]) segs.push({type:'stop', a:g.a, b:g.b, n:k + 1, meal:/午餐/.test(g.note)});
+    m += l[1]; visit += l[1];
+  });
+  if (t.e) { segs.push({type:'drive', a:m, b:m + t.e}); m += t.e; drive += t.e; }
+  return {start, end:m, segs, at, drive, visit, e:t.e};
+}
+
+function axis(){
+  let h = '';
+  for (let t = AX0; t <= AX1; t += 120) h += `<span style="left:${((t - AX0) / (AX1 - AX0) * 100).toFixed(2)}%">${t / 60}:00</span>`;
+  return `<div class="axis">${h}</div>`;
+}
+function bar(sc){
+  const p = m => (m - AX0) / (AX1 - AX0) * 100;
+  return `<div class="tl">${sc.segs.map(g => `<i class="${g.type}${g.meal ? ' meal' : ''}" style="left:${p(g.a).toFixed(2)}%;width:${(p(g.b) - p(g.a)).toFixed(2)}%" title="${g.type === 'drive' ? '開車' : '第 ' + g.n + ' 站'} ${hm(g.a)}–${hm(g.b)}">${g.n && g.b - g.a >= 40 ? g.n : ''}</i>`).join('')}</div>`;
+}
+
+function renderGantt(days){
+  const box = document.getElementById('gantt');
+  box.innerHTML = `<div class="grow"><span></span>${axis()}<span></span></div>` + days.map((d, i) =>
+    `<div class="grow${i === cur ? ' on' : ''}${d.extra ? ' x' : ''}" data-i="${i}" role="button" tabindex="0" aria-label="第 ${i + 1} 天 ${esc(d.title)}">
+      <b>D${i + 1}<span class="gt">${esc(d.title)}</span></b>${bar(SCH[i])}<span class="num">${hm(SCH[i].end)}</span></div>`).join('');
+  box.querySelectorAll('.grow[data-i]').forEach(r => {
+    r.addEventListener('click', () => setCur(+r.dataset.i, true));
+    r.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setCur(+r.dataset.i, true); } });
+  });
+}
+
+/* ---------- state ---------- */
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+let sel = new Set(store.get('ice-opts', []));
+let checks = store.get('ice-checks', {});
+let actOff = new Set(store.get('ice-actoff', []));
+let cur = 0;
+
+function itinerary(){
+  const out = [];
+  BASE.forEach(d => { out.push(d); OPTS.filter(o => o.after === d.id && sel.has(o.id)).forEach(o => out.push(o)); });
+  return out;
+}
+
+/* ---------- map ---------- */
+const K = 100, COS = Math.cos(65 * Math.PI / 180), LON0 = -24.75, LAT0 = 66.7;
+const P = ([lat, lon]) => [((lon - LON0) * COS * K + 12).toFixed(1), ((LAT0 - lat) * K + 10).toFixed(1)];
+const COAST = [[-22.7,63.82],[-22.0,63.83],[-21.2,63.87],[-20.5,63.75],[-19.9,63.55],[-19.2,63.40],[-18.6,63.42],[-17.9,63.55],[-17.0,63.78],[-16.3,63.90],[-15.8,64.15],[-15.1,64.22],[-14.5,64.40],[-14.2,64.65],[-13.6,64.95],[-13.5,65.20],[-13.6,65.50],[-14.5,65.75],[-14.8,66.05],[-15.4,66.15],[-16.0,66.53],[-16.5,66.20],[-17.2,66.10],[-17.8,66.03],[-18.05,65.75],[-18.1,65.66],[-18.25,65.85],[-18.6,66.15],[-19.4,66.10],[-19.6,65.75],[-20.0,65.72],[-20.3,66.10],[-20.6,65.72],[-21.0,65.55],[-21.3,65.85],[-21.8,66.2],[-22.4,66.45],[-23.2,66.3],[-24.0,65.95],[-24.5,65.55],[-23.8,65.4],[-22.5,65.15],[-22.3,65.05],[-23.0,64.98],[-23.8,64.9],[-24.05,64.85],[-23.5,64.75],[-22.6,64.78],[-22.0,64.55],[-22.2,64.35],[-21.9,64.2],[-22.0,64.05],[-22.7,64.0]];
+const TOWNS = [['Reykjavík',LL.RVK,-8,14],['Vík',LL.VIK,-6,14],['Höfn',LL.HOFN,6,10],['Egilsstaðir',LL.EGS,-60,-6],['Akureyri',LL.AKU,-18,16],['Mývatn',LL.MYV,6,-6]];
+
+function drawMap(days){
+  const svg = document.getElementById('map');
+  const coast = COAST.map(([lon, lat]) => P([lat, lon]).join(',')).join(' ');
+  let h = `<rect class="seabg" x="0" y="0" width="500" height="352" rx="6"/><polygon class="land" points="${coast}"/>`;
+  TOWNS.forEach(([n, ll, dx, dy]) => { const [x, y] = P(ll); h += `<text class="town" x="${+x + dx}" y="${+y + dy}">${n}</text>`; });
+  let prev = LL.KEF;
+  const segs = [], dots = [];
+  days.forEach((d, i) => {
+    const pts = [prev, ...d.stops.filter(s => s.ll).map(s => s.ll), LL[d.end]];
+    segs.push(`<polyline class="seg${i === cur ? ' on' : ''}" data-i="${i}" points="${pts.map(p => P(p).join(',')).join(' ')}"/>`);
+    d.stops.forEach(s => { if (s.ll) dots.push([s, i]); });
+    prev = LL[d.end];
+  });
+  h += segs.filter(s => !s.includes(' on')).join('') + segs.filter(s => s.includes(' on')).join('');
+  dots.forEach(([s, i]) => { const [x, y] = P(s.ll); h += `<circle class="dot${i === cur ? ' on' : ''}" cx="${x}" cy="${y}" r="${i === cur ? 4.5 : 2.6}"/>`; });
+  // labels for the current day, nudged to avoid stacking
+  const used = [];
+  days[cur].stops.filter(s => s.ll).forEach(s => {
+    let [x, y] = P(s.ll).map(Number);
+    let ly = y - 8;
+    while (used.some(u => Math.abs(u[0] - x) < 70 && Math.abs(u[1] - ly) < 12)) ly -= 12;
+    used.push([x, ly]);
+    const anchor = x > 380 ? 'end' : (x < 80 ? 'start' : 'middle');
+    h += `<text class="lbl" x="${x}" y="${ly}" text-anchor="${anchor}">${s.en.split(' · ')[0].split(' /')[0]}</text>`;
+  });
+  svg.innerHTML = h;
+  document.getElementById('mapDay').textContent = 'DAY ' + (cur + 1);
+  const d = days[cur];
+  document.getElementById('mapKm').textContent = `${d.title}・約 ${d.km} km`;
+  document.querySelectorAll('#strip button').forEach((b, i) => b.classList.toggle('on', i === cur));
+}
+
+/* ---------- render ---------- */
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const WD = '日一二三四五六';
+function dateOf(i){
+  const v = document.getElementById('startDate').value;
+  if (!v) return '';
+  const d = new Date(v + 'T12:00:00'); d.setDate(d.getDate() + i);
+  return `${d.getMonth() + 1}/${d.getDate()}（${WD[d.getDay()]}）`;
+}
+
+function renderOpts(){
+  const box = document.getElementById('opts');
+  box.innerHTML = OPTS.map(o => {
+    const on = sel.has(o.id), dis = !on && sel.size >= 3;
+    return `<label class="opt${on ? ' on' : ''}${dis ? ' dis' : ''}" for="opt-${o.id}">
+      <input type="checkbox" id="opt-${o.id}" data-o="${o.id}" ${on ? 'checked' : ''} ${dis ? 'disabled' : ''}>
+      <div><b>＋1 天　${esc(o.label)}</b><span>${esc(o.short)}</span></div></label>`;
+  }).join('');
+  box.querySelectorAll('input').forEach(inp => inp.addEventListener('change', () => {
+    inp.checked ? sel.add(inp.dataset.o) : sel.delete(inp.dataset.o);
+    store.set('ice-opts', [...sel]);
+    renderAll();
+  }));
+}
+
+function renderDays(days){
+  let prevStay = 'KEF 機場';
+  document.getElementById('days').innerHTML = days.map((d, i) => {
+    const from = prevStay; prevStay = d.stay.replace(/（.*/, '');
+    const sc = SCH[i];
+    const stops = d.stops.map((s, k) => {
+      const g = sc.at[k];
+      const when = g.stay
+        ? `<span class="clk">${hm(g.a)}–${hm(g.b)}</span>停留 ${dur(g.stay)}${g.note ? '・' + esc(g.note) : ''}`
+        : `<span class="clk">${hm(g.a)}</span>${esc(g.note || '抵達')}`;
+      return `<li>${g.dr ? `<div class="leg">↓ 開車約 ${dur(g.dr)}</div>` : ''}<b>${esc(s.n)}</b><span class="en">${esc(s.en)}</span>${s.price ? `<span class="price">約 ${s.price.toLocaleString()} ISK／人</span>` : ''}<div class="when">${when}</div>${s.p ? `<p>${esc(s.p)}</p>` : ''}</li>`;
+    }).join('');
+    const eta = d.end === 'KEF'
+      ? `可搭 ${hm(sc.end + 30)} 之後起飛的班機`
+      : `${sc.e ? '最後一段開車約 ' + dur(sc.e) + '，' : ''}預計 ${hm(sc.end)} 抵達住宿`;
+    return `<article class="day${d.extra ? ' extra' : ''}${i === cur ? ' on' : ''}" id="day-${i + 1}" data-i="${i}">
+      <div class="dhead">
+        <div class="dnum"><small>DAY</small><strong>${String(i + 1).padStart(2, '0')}</strong><em>${dateOf(i)}</em></div>
+        <div class="dtitle">
+          <h2>${esc(d.title)}</h2>
+          <div class="route">${esc(from)} → ${esc(d.stay.replace(/（.*/, ''))}</div>
+          <div class="chips">${d.roads.map(r => `<span class="road" title="${r} 號公路">${r}</span>`).join('')}
+            <span class="num">${d.km} km・開車 ${dur(sc.drive)}・景點 ${dur(sc.visit)}</span>${d.extra ? '<span class="tag">加選日</span>' : ''}${d.warn ? '<span class="tag x">長途日</span>' : ''}</div>
+        </div>
+      </div>
+      <div class="dbar">${axis()}${bar(sc)}</div>
+      <ol class="stops">${stops}</ol>
+      <div class="grid2">
+        <div class="box"><h4>住宿</h4><p>${esc(d.stay)}</p><p class="eta">${eta}</p></div>
+        <div class="box"><h4>餐廳</h4><ul>${d.food.map(f => `<li>${esc(f)}</li>`).join('')}</ul></div>
+      </div>
+      ${d.links.length ? `<div class="links">${d.links.map(([t, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)} ↗</a>`).join('')}</div>` : ''}
+      ${d.tip ? `<div class="tip${d.warn ? ' warn' : ''}">${esc(d.tip)}</div>` : ''}
+    </article>`;
+  }).join('');
+  document.querySelectorAll('.day').forEach(el => el.addEventListener('click', e => {
+    if (e.target.closest('a')) return;
+    setCur(+el.dataset.i, false);
+  }));
+}
+
+function renderStrip(days){
+  document.getElementById('strip').innerHTML = days.map((d, i) => `<button type="button" class="${d.extra ? 'opt-d' : ''}" data-i="${i}" aria-label="第 ${i + 1} 天 ${esc(d.title)}">${i + 1}</button>`).join('');
+  document.querySelectorAll('#strip button').forEach(b => b.addEventListener('click', () => setCur(+b.dataset.i, true)));
+}
+
+let DAYS = [];
+function setCur(i, scroll){
+  cur = i;
+  document.querySelectorAll('.day').forEach((el, j) => el.classList.toggle('on', j === i));
+  document.querySelectorAll('#gantt .grow[data-i]').forEach((el, j) => el.classList.toggle('on', j === i));
+  drawMap(DAYS);
+  if (scroll) document.getElementById('day-' + (i + 1)).scrollIntoView({block: 'start'});
+}
+
+function renderChecks(days){
+  const items = [
+    ['flight', '機票（抵達／離開 KEF）', '比較 Icelandair、easyJet、Wizz Air'],
+    ['car', '租車：7 座 SUV 或 9 人座 Van＋GP／SAAP 保險', '5 人加行李，5 人座 SUV 後車廂放不下；加購第二駕駛'],
+    ['ins', '旅遊平安險＋不便險', '']
+  ];
+  // group consecutive nights at the same stay
+  const nights = [];
+  days.slice(0, -1).forEach((d, i) => {
+    const key = d.stay.replace(/（續住）/, '');
+    const last = nights[nights.length - 1];
+    if (last && last.key === key) last.n++; else nights.push({key, n: 1, from: i + 1});
+  });
+  nights.forEach(s => items.push(['stay-' + s.key, '住宿：' + s.key, `Day ${s.from} 起・${s.n} 晚・5 人房或兩間房`]));
+  days.forEach((d, i) => d.stops.filter(s => s.act).forEach(s => items.push(['act-' + s.act, s.n + '（' + s.en.split(' · ')[0] + '）', `Day ${i + 1}・約 ${s.price.toLocaleString()} ISK／人`])));
+  const done = items.filter(it => checks[it[0]]).length;
+  document.getElementById('prog').style.width = (done / items.length * 100) + '%';
+  document.getElementById('checks').innerHTML = items.map(([id, t, sub]) =>
+    `<label class="ck${checks[id] ? ' done' : ''}" for="ck-${esc(id)}"><input type="checkbox" id="ck-${esc(id)}" data-k="${esc(id)}" ${checks[id] ? 'checked' : ''}><span><b>${esc(t)}</b>${sub ? `<small>${esc(sub)}</small>` : ''}</span></label>`).join('');
+  document.querySelectorAll('#checks input').forEach(inp => inp.addEventListener('change', () => {
+    checks[inp.dataset.k] = inp.checked; store.set('ice-checks', checks); renderChecks(DAYS);
+  }));
+}
+
+function renderBudget(days){
+  const acts = [];
+  days.forEach(d => d.stops.filter(s => s.act).forEach(s => acts.push(s)));
+  const box = document.getElementById('bacts');
+  box.innerHTML = '<div style="font-size:13px;color:var(--muted)">要參加的付費行程</div>' + acts.map(s =>
+    `<label for="ba-${s.act}"><input type="checkbox" id="ba-${s.act}" data-a="${s.act}" ${actOff.has(s.act) ? '' : 'checked'}> ${esc(s.n)}<span class="num">${s.price.toLocaleString()} ISK</span></label>`).join('');
+  box.querySelectorAll('input').forEach(inp => inp.addEventListener('change', () => {
+    inp.checked ? actOff.delete(inp.dataset.a) : actOff.add(inp.dataset.a);
+    store.set('ice-actoff', [...actOff]); calcBudget();
+  }));
+  calcBudget();
+}
+
+function calcBudget(){
+  const v = id => Math.max(0, parseFloat(document.getElementById(id).value) || 0);
+  const n = DAYS.length, km = DAYS.reduce((a, d) => a + d.km, 0), ppl = v('bPeople');
+  const actSum = DAYS.flatMap(d => d.stops.filter(s => s.act && !actOff.has(s.act))).reduce((a, s) => a + s.price, 0);
+  const rows = [
+    ['租車＋保險', `${n} 天`, v('bCar') * n],
+    ['油錢', `${km.toLocaleString()} km`, Math.round(km * v('bFuelC') / 100 * v('bFuelP'))],
+    ['住宿', `${n - 1} 晚`, v('bStay') * (n - 1)],
+    ['餐飲', `${ppl} 人 × ${n} 天`, v('bFood') * ppl * n],
+    ['門票與行程', `${ppl} 人`, actSum * ppl]
+  ];
+  const total = rows.reduce((a, r) => a + r[2], 0);
+  document.getElementById('btab').innerHTML = rows.map(([k, s, x]) => `<tr><td>${k}　<span style="color:var(--muted);font-size:12.5px">${s}</span></td><td>${x.toLocaleString()} ISK</td></tr>`).join('')
+    + `<tr class="total"><td>合計</td><td>${total.toLocaleString()} ISK</td></tr>`;
+  const twd = Math.round(total * v('bRate'));
+  document.getElementById('bTwd').textContent = `≈ NT$ ${twd.toLocaleString()}`;
+}
+
+let io;
+function watchScroll(){
+  if (io) io.disconnect();
+  if (!('IntersectionObserver' in window)) return;
+  io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { const i = +e.target.dataset.i; if (i !== cur) setCur(i, false); } });
+  }, {rootMargin: '-35% 0px -55% 0px'});
+  document.querySelectorAll('.day').forEach(el => io.observe(el));
+}
+
+function renderAll(){
+  DAYS = itinerary();
+  if (cur >= DAYS.length) cur = 0;
+  SCH = DAYS.map((d, i) => sched(d, i ? DAYS[i - 1].id : null));
+  AX0 = Math.min(420, Math.floor(Math.min(...SCH.map(s => s.start)) / 60) * 60);
+  AX1 = Math.max(1260, Math.ceil(Math.max(...SCH.map(s => s.end)) / 60) * 60);
+  document.getElementById('sDrive').textContent = Math.round(SCH.reduce((a, s) => a + s.drive, 0) / 60);
+  document.getElementById('sDays').textContent = DAYS.length;
+  document.getElementById('sNights').textContent = DAYS.length - 1;
+  document.getElementById('sKm').textContent = DAYS.reduce((a, d) => a + d.km, 0).toLocaleString();
+  renderOpts(); renderGantt(DAYS); renderDays(DAYS); renderStrip(DAYS); drawMap(DAYS); renderChecks(DAYS); renderBudget(DAYS); watchScroll();
+}
+
+const sd = document.getElementById('startDate');
+sd.value = store.get('ice-start-v2', sd.value);
+sd.addEventListener('change', () => { store.set('ice-start-v2', sd.value); renderDays(DAYS); setCur(cur, false); watchScroll(); });
+['bPeople','bRate','bCar','bStay','bFood','bFuelP','bFuelC'].forEach(id => document.getElementById(id).addEventListener('input', calcBudget));
+renderAll();
+</script>
+</body>
+</html>
