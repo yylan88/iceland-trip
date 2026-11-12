@@ -164,7 +164,11 @@ section.blk>.wrap>p.sub{color:var(--muted);margin:6px 0 20px;max-width:65ch}
 .bacts label .num{margin-left:auto;color:var(--muted);font-size:12.5px}
 table.btab{width:100%;border-collapse:collapse;font-size:14px}
 table.btab td{padding:8px 0;border-bottom:1px solid var(--line)}
-table.btab td:last-child{text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+table.btab td+td{text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap;padding-left:12px}
+table.btab td:last-child{color:var(--glacier);font-weight:600}
+table.btab th{font-size:12px;font-weight:600;color:var(--muted);text-align:right;padding:0 0 4px 12px;border-bottom:1px solid var(--line)}
+table.btab th:first-child{text-align:left;padding-left:0}
+@media (max-width:420px){table.btab{font-size:13px}table.btab td+td{padding-left:8px}}
 table.btab tr.total td{border-bottom:none;font-weight:700;font-size:16px;padding-top:14px}
 .twd{font-family:var(--f-display);font-weight:800;font-size:48px;line-height:1;margin-top:8px;color:var(--glacier)}
 .note{font-size:12.5px;color:var(--muted);margin-top:10px}
@@ -801,10 +805,12 @@ function calcBudget(){
     ['門票與行程', `${ppl} 人`, actSum * ppl]
   ];
   const total = rows.reduce((a, r) => a + r[2], 0);
-  document.getElementById('btab').innerHTML = rows.map(([k, s, x]) => `<tr><td>${k}　<span style="color:var(--muted);font-size:12.5px">${s}</span></td><td>${x.toLocaleString()} ISK</td></tr>`).join('')
-    + `<tr class="total"><td>冰島當地小計</td><td>${total.toLocaleString()} ISK</td></tr>`;
-  const local = Math.round(total * v('bRate')), fly = Math.round(v('bFlight') * ppl), all = local + fly;
   const nt = x => 'NT$ ' + x.toLocaleString();
+  const tw = x => nt(Math.round(x * v('bRate')));
+  document.getElementById('btab').innerHTML = `<tr><th>項目</th><th>ISK</th><th>台幣</th></tr>`
+    + rows.map(([k, s, x]) => `<tr><td>${k}　<span style="color:var(--muted);font-size:12.5px;display:inline-block;white-space:nowrap">${s}</span></td><td>${x.toLocaleString()}</td><td>${tw(x)}</td></tr>`).join('')
+    + `<tr class="total"><td>冰島當地小計</td><td>${total.toLocaleString()}</td><td>${tw(total)}</td></tr>`;
+  const local = Math.round(total * v('bRate')), fly = Math.round(v('bFlight') * ppl), all = local + fly;
   document.getElementById('bSplit').innerHTML =
     `<div><span>冰島當地花費（${n} 天 ${n - 1} 晚）</span><span>${nt(local)}</span></div>` +
     `<div><span>機票 ${v('bFlight').toLocaleString()} × ${ppl} 人</span><span>${nt(fly)}</span></div>`;
