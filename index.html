@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="冰島 1 號公路環島自駕 12–15 天行程：每日景點、時間軸、路線地圖、預訂清單與預算試算。">
+<meta name="description" content="冰島 1 號公路環島自駕 15 天行程（2027/6/16–6/30）：機票、每日景點、時間軸、路線地圖、預訂清單與預算試算。">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>余家冰島環島自駕手冊</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -67,6 +67,21 @@ h1,h2,h3{font-family:var(--f-head);text-wrap:balance;margin:0;line-height:1.25}
 .stat .k{font-size:12px;color:var(--muted)}
 .field{display:flex;flex-direction:column;gap:4px;margin-top:14px;font-size:13px;color:var(--muted)}
 .field input{font:inherit;color:var(--ink);background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:7px 10px}
+.need{margin:10px 0 0;font-size:13px;font-weight:700;color:var(--lava)}
+.need.ok{color:var(--moss)}
+/* flights */
+.flights{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}
+@media (max-width:700px){.flights{grid-template-columns:1fr}}
+.fl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 12px;font-size:14px;align-items:baseline}
+.fl .tag{grid-column:1/-1;justify-self:start;margin-bottom:6px}
+.fl .t{font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-weight:600;color:var(--glacier);white-space:nowrap}
+.fl .t small{display:block;font-weight:400;font-size:11px;color:var(--lava)}
+.fl .via{grid-column:2;font-size:12.5px;color:var(--muted);padding:2px 0 4px}
+.fmeta{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:14px;font-size:13px;color:var(--muted)}
+.fmeta b{color:var(--ink);font-family:var(--f-mono)}
+.split{display:flex;flex-direction:column;gap:2px;margin-top:6px;font-size:14px}
+.split div{display:flex;justify-content:space-between;gap:12px}
+.split div span:last-child{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
 
 /* main grid */
 .main{display:grid;grid-template-columns:minmax(0,1fr) 440px;gap:28px;align-items:start;padding-block:12px 40px}
@@ -208,24 +223,48 @@ html{scroll-behavior:smooth}
 </div></nav>
 
 <header class="hero wrap" id="top">
-  <div class="eyebrow">2027 年 6 月中下旬 · Route 1 逆時針環島</div>
+  <div class="eyebrow">2027/6/16 – 6/30 · 15 天 14 晚 · Route 1 逆時針環島</div>
   <h1>余家冰島環島自駕手冊</h1>
-  <p class="lede">以 12 天為骨架的 1 號公路環島行程，走南岸瀑布、冰河湖、東部峽灣、米湖地熱區，再繞斯奈山半島與黃金圈回到雷克雅維克。下方可加選 0–3 天，拉長成 13–15 天，地圖、里程、預訂清單與預算會跟著更新。</p>
+  <p class="lede">機票已經訂好：6/16 下午抵達凱夫拉維克，7/1 凌晨離境，在冰島共 15 天 14 晚。行程以 12 天的 1 號公路環島為主，走南岸瀑布、冰河湖、東部峽灣、米湖地熱區，再繞斯奈山半島與黃金圈回到雷克雅維克，另外從 4 個加選日挑 3 個補滿 15 天。地圖、里程、預訂清單與預算會跟著你的選擇更新。</p>
+
+  <div class="panel" id="flight" style="margin-top:28px">
+    <h3>機票・TPE ⇄ KEF（法蘭克福轉機）</h3>
+    <div class="flights">
+      <div class="fl">
+        <span class="tag">去程・6/15（二）出發</span>
+        <span class="t">22:30</span><span><b>TPE</b> 桃園機場 T1</span>
+        <span></span><span class="via">於法蘭克福轉機 7 小時 10 分（6/16 06:50–14:00）</span>
+        <span class="t">15:45<small>6/16（三）</small></span><span><b>KEF</b> 凱夫拉維克・入境取車</span>
+      </div>
+      <div class="fl">
+        <span class="tag">回程・7/1（四）00:50 起飛</span>
+        <span class="t">00:50<small>7/1（四）</small></span><span><b>KEF</b> 凱夫拉維克（6/30 晚上就要到機場）</span>
+        <span></span><span class="via">於法蘭克福轉機 4 小時 50 分（06:25–11:15）</span>
+        <span class="t">06:15<small>7/2（五）</small></span><span><b>TPE</b> 桃園機場 T1</span>
+      </div>
+    </div>
+    <div class="fmeta">
+      <span>票價 <b>NT$ 53,500</b>／人</span>
+      <span>經濟艙・托運 <b>2 × 23 kg</b>・手提 <b>1 × 7 kg</b></span>
+      <span>每段航班提前 <b>3 小時</b>到機場</span>
+    </div>
+  </div>
 
   <div class="controls">
     <div class="panel">
-      <h3>加選天數（最多 3 天）</h3>
+      <h3>加選日：4 選 3（機票已定 15 天）</h3>
       <div class="opts" id="opts"></div>
+      <p class="need" id="need"></p>
     </div>
     <div class="panel">
       <h3>行程概覽</h3>
       <div class="stats">
-        <div class="stat"><div class="v" id="sDays">12</div><div class="k">天</div></div>
-        <div class="stat"><div class="v" id="sNights">11</div><div class="k">晚住宿</div></div>
-        <div class="stat"><div class="v" id="sKm">2225</div><div class="k">公里（估）</div></div>
-        <div class="stat"><div class="v" id="sDrive">40</div><div class="k">小時車程</div></div>
+        <div class="stat"><div class="v" id="sDays">15</div><div class="k">天</div></div>
+        <div class="stat"><div class="v" id="sNights">14</div><div class="k">晚住宿</div></div>
+        <div class="stat"><div class="v" id="sKm">2,810</div><div class="k">公里（估）</div></div>
+        <div class="stat"><div class="v" id="sDrive">43</div><div class="k">小時車程</div></div>
       </div>
-      <label class="field" for="startDate">出發日期（抵達 KEF 當天）
+      <label class="field" for="startDate">抵達 KEF 日期（依機票）
         <input type="date" id="startDate" value="2027-06-16">
       </label>
     </div>
@@ -262,11 +301,12 @@ html{scroll-behavior:smooth}
 
 <section class="blk" id="budget"><div class="wrap">
   <h2>預算試算</h2>
-  <p class="sub">數字皆為估算預設值，請依實際報價修改。住宿與租車以「整組」計，餐飲與門票以「每人」計。</p>
+  <p class="sub">機票以實際票價 NT$ 53,500／人計算，其他數字都是估算預設值，請依實際報價修改。住宿與租車以「整組」計，機票、餐飲與門票以「每人」計。</p>
   <div class="budget">
     <div class="panel">
       <div class="binputs">
-        <label class="field" for="bPeople">人數（付費門票）<input type="number" id="bPeople" min="1" value="5"></label>
+        <label class="field" for="bPeople">人數<input type="number" id="bPeople" min="1" value="5"></label>
+        <label class="field" for="bFlight">機票／人（TWD）<input type="number" id="bFlight" step="100" value="53500"></label>
         <label class="field" for="bRate">匯率：1 ISK ≈ TWD<input type="number" id="bRate" step="0.01" value="0.23"></label>
         <label class="field" for="bCar">租車＋保險／天（7 座 SUV，ISK）<input type="number" id="bCar" step="1000" value="45000"></label>
         <label class="field" for="bStay">住宿／晚（5 人，ISK）<input type="number" id="bStay" step="1000" value="65000"></label>
@@ -278,8 +318,10 @@ html{scroll-behavior:smooth}
     </div>
     <div class="panel">
       <table class="btab" id="btab"></table>
+      <div class="split" id="bSplit"></div>
       <div class="twd" id="bTwd"></div>
-      <div class="note">不含機票。冰島物價約為台灣的 2–3 倍；超市自煮、加油站熱狗（pylsur）與湯麵包能大幅省餐費。</div>
+      <div class="note" id="bPer"></div>
+      <div class="note">冰島物價約為台灣的 2–3 倍；超市自煮、加油站熱狗（pylsur）與湯麵包能大幅省餐費。</div>
     </div>
   </div>
 </div></section>
@@ -290,7 +332,8 @@ html{scroll-behavior:smooth}
   <div class="tips">
     <div class="tcard"><h3>6 月・一家五口</h3><ul>
       <li><b>永晝</b>：6 月中下旬日落接近午夜、凌晨 3 點就天亮，天不會全黑，每人帶眼罩。</li>
-      <li>6/17 是冰島國慶日，雷克雅維克有遊行，部分商店休息。</li>
+      <li>6/17（第 2 天）是冰島國慶日，雷克雅維克有遊行，部分商店休息；當天一早就往南岸出發，先在雷克雅維克超市補好貨。</li>
+      <li><b>行李</b>：機票每人可托運 2 × 23 kg，5 人最多 10 件大箱，7 座 SUV 放不下，建議租 9 人座 Van，或每人只帶 1 件大箱。</li>
       <li>氣溫約 8–15°C、風大，用洋蔥式穿法；米湖 6 月蠓蟲最多，帶防蚊頭網。</li>
       <li><b>車</b>：5 個大人加 5 件大行李，選 7 座 SUV（第三排放倒）或 9 人座 Van，登記 2–3 位駕駛。</li>
       <li><b>住宿</b>：很多房型最多住 4 人，訂房時篩「5 位成人」，找家庭房、公寓或整棟小屋。</li>
@@ -325,15 +368,16 @@ html{scroll-behavior:smooth}
       <li>同一店家單張收據含稅滿 <b>6,000 ISK</b> 可退稅，請店家開退稅單，於出境 KEF 時辦理，購買後 90 天內須離境。</li>
       <li>必買：Omnom 巧克力、甘草巧克力（Draumur、Þristur）、管裝魚子醬抹醬（長得像牙膏，可帶回台灣）、Saltverk 海鹽、羊毛衫 lopapeysa。</li>
     </ul></div>
-    <div class="tcard"><h3>機票與廉航</h3><ul>
-      <li>參考行程搭的 PLAY 已於 2025 年 9 月停飛；歐洲轉機進冰島可比較 Icelandair、easyJet、Wizz Air 等。</li>
-      <li>廉航基本票通常不含大件手提與托運，訂票時加購行李比機場臨櫃便宜，尺寸與重量要看清楚。</li>
+    <div class="tcard"><h3>機票與轉機</h3><ul>
+      <li>去程在法蘭克福轉機 7 小時多，可以在機場休息室休息，或在機場內吃早餐；不建議出關進市區。</li>
+      <li>回程是 <b>7/1 00:50</b> 起飛，要在 <b>6/30 晚上</b>到機場，別看成 7/1 晚上。最晚 21:50 前抵達 KEF，還車、退稅都在這之前完成。</li>
+      <li>6/16 落地 15:45，通關、領行李、取車約 1 小時，藍湖訂 17:30 左右的時段比較從容。</li>
       <li>租車比價：<a href="https://www.rentalcars.com/" target="_blank" rel="noopener">rentalcars.com</a>；5 人同行可登記 2–3 位駕駛輪流開。</li>
     </ul></div>
     <div class="tcard"><h3>省錢與安全</h3><ul>
       <li>早餐、午餐用超市食材自理，晚餐再上館子，餐費可省一半。</li>
       <li>冰島自來水可直接生飲，帶水壺就不用買瓶裝水。</li>
-      <li>第 9 天（北部→斯奈山）車程最長，多位駕駛輪流開，每 2 小時停一次。</li>
+      <li>北部→斯奈山那天（標「長途日」）車程最長，多位駕駛輪流開，每 2 小時停一次。</li>
       <li>緊急電話 112；藥局叫 Apótek，主要城鎮都有。</li>
     </ul></div>
   </div>
@@ -352,12 +396,12 @@ const LL = {
 const BASE = [
  {id:'d1', title:'抵達凱夫拉維克・藍湖溫泉', roads:['41','43'], km:70, hrs:'1 小時', end:'RVK', stay:'雷克雅維克',
   stops:[
-   {n:'KEF 機場取車', en:'Keflavík Airport', ll:LL.KEF, p:'入境大廳的免稅店先買酒，冰島超市買不到。'},
-   {n:'藍湖溫泉', en:'Blue Lagoon', ll:[63.880,-22.449], p:'需預約入場時段。矽泥會讓頭髮乾澀打結，下水前抹潤髮乳，頭髮盡量不要泡水。', act:'bl', price:12000},
-   {n:'雷克雅維克', en:'Reykjavík', ll:LL.RVK, p:'入住後到超市補給早餐。'}],
-  food:['Íslenski barinn（冰島傳統菜，可以試海鸚鵡）'],
+   {n:'KEF 落地・取車', en:'Keflavík Airport', ll:LL.KEF, p:'15:45 落地（法蘭克福轉機）。入境大廳的免稅店先買酒，冰島超市買不到。'},
+   {n:'藍湖溫泉', en:'Blue Lagoon', ll:[63.880,-22.449], p:'預約 17:30 左右的入場時段，泡完長途飛行的疲勞都消了。矽泥會讓頭髮乾澀打結，下水前抹潤髮乳，頭髮盡量不要泡水。', act:'bl', price:12000},
+   {n:'雷克雅維克', en:'Reykjavík', ll:LL.RVK, p:'入住前到超市補給早餐（Bónus 營業到 20:00 左右，來不及就去 10-11 或 Krónan）。'}],
+  food:['藍湖園區內 Lava Restaurant，或到雷克雅維克吃熱狗當晚餐'],
   links:[['藍湖官網','https://www.bluelagoon.com/'],['雷克雅維克住宿',bk('Reykjavik')]],
-  tip:'長途飛行後第一天別排太滿。藍湖離機場約 20 分鐘，最適合放在抵達日或離境日。'},
+  tip:'飛了 25 小時，第一天只排藍湖。6 月晚上 10 點天還很亮，不用趕，但早點睡，隔天就要往南岸出發。'},
 
  {id:'d2', title:'南岸瀑布大道・黑沙灘', roads:['1'], km:190, hrs:'2.5 小時', end:'VIK', stay:'維克 Vík',
   stops:[
@@ -455,15 +499,16 @@ const BASE = [
   links:[['DIVE.IS（Silfra 浮潛）','https://www.dive.is/'],['Arctic Adventures（Silfra 浮潛）','https://adventures.is/'],['黃金圈住宿',bk('Golden Circle Iceland')]],
   tip:'Silfra 早上第一梯人最少、水最清。浮潛後身體很冷，帶保溫瓶裝熱飲。'},
 
- {id:'d12', title:'火口湖・溫泉河谷・好市多・離境', roads:['35','1','41'], km:150, hrs:'2 小時', end:'KEF', stay:'—（搭機離境）',
+ {id:'d12', title:'火口湖・溫泉河谷・好市多・夜班機離境', roads:['35','1','41'], km:155, hrs:'2.5 小時', end:'KEF', stay:'—（7/1 00:50 班機離境）',
   stops:[
-   {n:'火口湖', en:'Kerið', ll:[64.041,-20.885], p:'紅色火山渣環繞的翠綠火口湖，需購票入場。'},
-   {n:'溫泉河谷健行', en:'Reykjadalur · Hveragerði', ll:[64.02,-21.21], p:'單程約 3 km 上坡步道，終點是可以直接泡的溫泉河。帶泳衣、毛巾。'},
-   {n:'冰島好市多', en:'Costco Garðabær', ll:[64.07,-21.92], p:'台灣會員卡可用，順便把油加滿還車。'},
-   {n:'KEF 退稅・還車', en:'Keflavík Airport', ll:LL.KEF, p:'退稅單在出境前辦理，還車預留檢查時間。'}],
-  food:['Bæjarins Beztu Pylsur（熱狗攤）'],
+   {n:'火口湖', en:'Kerið', ll:[64.041,-20.885], p:'紅色火山渣環繞的翠綠火口湖，需購票入場。早上退房後慢慢出發。'},
+   {n:'溫泉河谷健行', en:'Reykjadalur · Hveragerði', ll:[64.02,-21.21], p:'單程約 3 km 上坡步道，終點是可以直接泡的溫泉河。帶泳衣、毛巾，泡完換上乾衣服搭機。'},
+   {n:'冰島好市多', en:'Costco Garðabær', ll:[64.07,-21.92], p:'台灣會員卡可用，買伴手禮，並把油加滿再還車。'},
+   {n:'雷克雅維克最後晚餐', en:'Reykjavík', ll:LL.RVK, p:'吃完晚餐再往機場，車上不要留食物與垃圾。'},
+   {n:'KEF 還車・退稅・報到', en:'Keflavík Airport', ll:LL.KEF, p:'航空公司要求提前 3 小時，21:50 前要到。先還車、再辦退稅，最後報到托運。'}],
+  food:['Bæjarins Beztu Pylsur（熱狗攤）','Costco 美食區'],
   links:[['KEF 機場','https://www.kefairport.is/']],
-  tip:'班機若在下午 5 點前，跳過溫泉河谷直接去好市多。伴手禮：Omnom 巧克力、甘草巧克力、管裝魚子醬、Saltverk 海鹽、羊毛製品。'}
+  tip:'這天沒有住宿，前一晚的旅館早上就要退房，貴重物品和換洗衣物放隨身包。伴手禮：Omnom 巧克力、甘草巧克力、管裝魚子醬、Saltverk 海鹽、羊毛製品。'}
 ];
 
 const OPTS = [
@@ -506,7 +551,7 @@ OPTS.forEach(o => o.extra = true);
 
 /* ---------- timing: s = 出發時間；L = 每站 [從上一點開車分鐘, 停留分鐘, 備註]；e = 最後一站到住宿的車程；alt = 前一天是某加選日時第一段改用的車程 ---------- */
 const TIME = {
-  d1: {s:'13:00', L:[[0,45,'取車手續'],[20,180],[45,60,'超市補給・入住']], e:0},
+  d1: {s:'15:45', L:[[0,75,'通關・領行李・取車'],[20,150],[45,60,'超市補給・入住']], e:0},
   d2: {s:'08:30', L:[[60,20],[50,75],[30,75,'含午餐'],[35,20],[10,60]], e:10},
   d3: {s:'09:30', L:[[55,90],[35,0,'抵達入住']], e:0},
   d4: {s:'08:30', L:[[75,120,'含野餐午餐'],[50,75],[5,40],[80,0,'抵達入住']], e:0},
@@ -517,7 +562,7 @@ const TIME = {
   d9: {s:'08:00', L:[[75,120],[105,45,'帶三明治野餐'],[120,45,'超市補給']], e:75},
   d10:{s:'09:00', L:[[20,45],[50,75],[55,75,'含午餐'],[150,90,'入住・晚餐']], e:0},
   d11:{s:'08:00', L:[[50,180,'含裝備著裝'],[55,40],[20,75,'含午餐'],[10,60]], e:40},
-  d12:{s:'08:00', L:[[30,45],[25,180,'來回健行＋泡溫泉河'],[45,90,'含午餐'],[45,120,'還車・退稅・報到']], e:0},
+  d12:{s:'10:00', L:[[30,45],[25,180,'來回健行＋泡溫泉河・野餐午餐'],[45,90,'採買・加油'],[20,90,'含晚餐'],[45,90,'還車・退稅・報到']], e:0},
   oR: {s:'10:00', L:[[10,60],[15,90,'含午餐'],[15,150]], e:15},
   oA: {s:'09:00', L:[[30,180],[25,60]], e:15},
   oB: {s:'09:00', L:[[75,150],[10,75,'含午餐'],[10,45]], e:80},
@@ -537,7 +582,7 @@ function sched(d, prevId){
     if (dr) { segs.push({type:'drive', a:m, b:m + dr}); m += dr; drive += dr; }
     const g = {a:m, b:m + l[1], stay:l[1], dr, note:l[2] || ''};
     at.push(g);
-    if (l[1]) segs.push({type:'stop', a:g.a, b:g.b, n:k + 1, meal:/午餐/.test(g.note)});
+    if (l[1]) segs.push({type:'stop', a:g.a, b:g.b, n:k + 1, meal:/午餐|晚餐/.test(g.note)});
     m += l[1]; visit += l[1];
   });
   if (t.e) { segs.push({type:'drive', a:m, b:m + t.e}); m += t.e; drive += t.e; }
@@ -570,7 +615,9 @@ const store = {
   get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
   set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
 };
-let sel = new Set(store.get('ice-opts', []));
+const NEED = 3; // 機票 6/16–6/30 = 15 天 = 12 天主線 + 3 個加選日
+const FLIGHT = {out:'6/15 22:30 桃園出發', back:'7/1 00:50', home:'7/2 06:15 抵達桃園'};
+let sel = new Set(store.get('ice-opts-v2', ['oA','oB','oC']));
 let checks = store.get('ice-checks', {});
 let actOff = new Set(store.get('ice-actoff', []));
 let cur = 0;
@@ -632,14 +679,19 @@ function dateOf(i){
 function renderOpts(){
   const box = document.getElementById('opts');
   box.innerHTML = OPTS.map(o => {
-    const on = sel.has(o.id), dis = !on && sel.size >= 3;
+    const on = sel.has(o.id), dis = !on && sel.size >= NEED;
     return `<label class="opt${on ? ' on' : ''}${dis ? ' dis' : ''}" for="opt-${o.id}">
       <input type="checkbox" id="opt-${o.id}" data-o="${o.id}" ${on ? 'checked' : ''} ${dis ? 'disabled' : ''}>
       <div><b>＋1 天　${esc(o.label)}</b><span>${esc(o.short)}</span></div></label>`;
   }).join('');
+  const need = document.getElementById('need'), left = NEED - sel.size;
+  need.className = 'need' + (left ? '' : ' ok');
+  need.textContent = left
+    ? `機票已定 6/16–6/30 共 15 天，目前只排了 ${12 + sel.size} 天，還要再選 ${left} 個加選日，不然最後 ${left} 天沒有行程。`
+    : '已排滿 15 天，剛好接上 6/30 晚上的回程班機。想換的話，先取消一個再勾另一個。';
   box.querySelectorAll('input').forEach(inp => inp.addEventListener('change', () => {
     inp.checked ? sel.add(inp.dataset.o) : sel.delete(inp.dataset.o);
-    store.set('ice-opts', [...sel]);
+    store.set('ice-opts-v2', [...sel]);
     renderAll();
   }));
 }
@@ -657,7 +709,7 @@ function renderDays(days){
       return `<li>${g.dr ? `<div class="leg">↓ 開車約 ${dur(g.dr)}</div>` : ''}<b>${esc(s.n)}</b><span class="en">${esc(s.en)}</span>${s.price ? `<span class="price">約 ${s.price.toLocaleString()} ISK／人</span>` : ''}<div class="when">${when}</div>${s.p ? `<p>${esc(s.p)}</p>` : ''}</li>`;
     }).join('');
     const eta = d.end === 'KEF'
-      ? `可搭 ${hm(sc.end + 30)} 之後起飛的班機`
+      ? `${hm(sc.end)} 完成報到，搭 ${FLIGHT.back} 班機（法蘭克福轉機，${FLIGHT.home}）`
       : `${sc.e ? '最後一段開車約 ' + dur(sc.e) + '，' : ''}預計 ${hm(sc.end)} 抵達住宿`;
     return `<article class="day${d.extra ? ' extra' : ''}${i === cur ? ' on' : ''}" id="day-${i + 1}" data-i="${i}">
       <div class="dhead">
@@ -701,8 +753,9 @@ function setCur(i, scroll){
 
 function renderChecks(days){
   const items = [
-    ['flight', '機票（抵達／離開 KEF）', '比較 Icelandair、easyJet、Wizz Air'],
-    ['car', '租車：7 座 SUV 或 9 人座 Van＋GP／SAAP 保險', '5 人加行李，5 人座 SUV 後車廂放不下；加購第二駕駛'],
+    ['flight', '機票 TPE ⇄ KEF（NT$ 53,500／人）', `${FLIGHT.out} → 6/16 15:45 抵達 KEF；回程 ${FLIGHT.back}`],
+    ['car', '租車：9 人座 Van 或 7 座 SUV＋GP／SAAP 保險', '取車 6/16 約 16:30、還車 6/30 約 20:00（KEF）；5 人加行李，加購第二駕駛'],
+    ['bl-slot', '藍湖入場時段：6/16 17:30 左右', '落地 15:45＋通關取車約 1 小時'],
     ['ins', '旅遊平安險＋不便險', '']
   ];
   // group consecutive nights at the same stay
@@ -749,9 +802,16 @@ function calcBudget(){
   ];
   const total = rows.reduce((a, r) => a + r[2], 0);
   document.getElementById('btab').innerHTML = rows.map(([k, s, x]) => `<tr><td>${k}　<span style="color:var(--muted);font-size:12.5px">${s}</span></td><td>${x.toLocaleString()} ISK</td></tr>`).join('')
-    + `<tr class="total"><td>合計</td><td>${total.toLocaleString()} ISK</td></tr>`;
-  const twd = Math.round(total * v('bRate'));
-  document.getElementById('bTwd').textContent = `≈ NT$ ${twd.toLocaleString()}`;
+    + `<tr class="total"><td>冰島當地小計</td><td>${total.toLocaleString()} ISK</td></tr>`;
+  const local = Math.round(total * v('bRate')), fly = Math.round(v('bFlight') * ppl), all = local + fly;
+  const nt = x => 'NT$ ' + x.toLocaleString();
+  document.getElementById('bSplit').innerHTML =
+    `<div><span>冰島當地花費（${n} 天 ${n - 1} 晚）</span><span>${nt(local)}</span></div>` +
+    `<div><span>機票 ${v('bFlight').toLocaleString()} × ${ppl} 人</span><span>${nt(fly)}</span></div>`;
+  document.getElementById('bTwd').textContent = `≈ ${nt(all)}`;
+  document.getElementById('bPer').textContent = ppl
+    ? `全家總計（含機票）；平均每人約 ${nt(Math.round(all / ppl))}，其中機票 ${nt(v('bFlight'))}、當地花費 ${nt(Math.round(local / ppl))}。`
+    : '';
 }
 
 let io;
@@ -778,9 +838,9 @@ function renderAll(){
 }
 
 const sd = document.getElementById('startDate');
-sd.value = store.get('ice-start-v2', sd.value);
-sd.addEventListener('change', () => { store.set('ice-start-v2', sd.value); renderDays(DAYS); setCur(cur, false); watchScroll(); });
-['bPeople','bRate','bCar','bStay','bFood','bFuelP','bFuelC'].forEach(id => document.getElementById(id).addEventListener('input', calcBudget));
+sd.value = store.get('ice-start-v3', sd.value);
+sd.addEventListener('change', () => { store.set('ice-start-v3', sd.value); renderDays(DAYS); setCur(cur, false); watchScroll(); });
+['bPeople','bFlight','bRate','bCar','bStay','bFood','bFuelP','bFuelC'].forEach(id => document.getElementById(id).addEventListener('input', calcBudget));
 renderAll();
 </script>
 </body>
