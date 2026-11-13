@@ -436,13 +436,14 @@ const BASE = [
   links:[['赫本住宿',bk('Höfn')]],
   tip:'1 號公路沿線就看得到好幾條冰舌，例如 Svínafellsjökull，路邊停車點即可近看。'},
 
- {id:'d5', title:'東部峽灣・海港的蛋', roads:['1'], km:115, hrs:'1.5 小時', end:'BRAG', stay:'Bragðavellir Cottages',
+ {id:'d5', title:'蝙蝠山・東部峽灣・海港的蛋', roads:['1'], km:125, hrs:'1.5 小時', end:'BRAG', stay:'Bragðavellir Cottages',
   stops:[
+   {n:'蝙蝠山', en:'Vestrahorn · Stokksnes', ll:[64.25,-14.98], p:'像蝙蝠展翅的鋸齒山峰，前面是黑沙丘與海灘。在 Viking Café 付私有地入場費後，開幾公里碎石路進去，一般小客車慢慢開即可。退潮、無風時沙灘積水能拍到山的倒影；沙丘上風很大。入場費以現場為準。', act:'stokk', price:1000, walkin:true},
    {n:'奇妙的蛋', en:'Eggin í Gleðivík · Djúpivogur', ll:[64.656,-14.285], p:'34 顆石雕鳥蛋沿著港邊排開，代表當地 34 種鳥。'},
    {n:'Bragðavellir Cottages', en:'Hamarsfjörður', ll:LL.BRAG, p:'峽灣旁的小木屋，晚上有機會看到極光（秋冬）。'}],
   food:['Djúpivogur 港邊咖啡館'],
   links:[['Bragðavellir 住宿',bk('Bragðavellir Cottages')]],
-  tip:'東部峽灣路線沿海蜿蜒，開不快，但幾乎每個彎都是風景。'},
+  tip:'蝙蝠山就在赫本往東 1 號公路旁（Almannaskarð 隧道前右轉），不用繞路。出發前查一下潮汐表，退潮時倒影最好拍。東部峽灣路線沿海蜿蜒，開不快，但幾乎每個彎都是風景。'},
 
  {id:'d6', title:'白日夢公路・白日夢小鎮・黛提瀑布', roads:['1','93','862'], km:350, hrs:'4 小時', end:'MYV', stay:'米湖 Mývatn 周邊',
   stops:[
@@ -559,7 +560,7 @@ const TIME = {
   d2: {s:'08:30', L:[[60,20],[50,75],[30,75,'含午餐'],[35,20],[10,60]], e:10},
   d3: {s:'09:30', L:[[55,90],[35,0,'抵達入住']], e:0},
   d4: {s:'08:30', L:[[75,120,'含野餐午餐'],[50,75],[5,40],[80,0,'抵達入住']], e:0},
-  d5: {s:'10:00', L:[[80,60,'含午餐'],[20,0,'抵達入住']], e:0},
+  d5: {s:'09:30', L:[[15,75,'Viking Café 付入場費'],[70,60,'含午餐'],[20,0,'抵達入住']], e:0},
   d6: {s:'08:30', L:[[95,20],[15,90,'含午餐'],[155,60],[35,45]], e:10, alt:{oC:25}},
   d7: {s:'09:30', L:[[10,30],[10,75],[20,90,'含 Vogafjós 午餐'],[20,120]], e:35},
   d8: {s:'08:30', L:[[40,240,'含 3 小時出海＋午餐'],[45,45],[45,120,'逛街・晚餐']], e:0},
@@ -770,7 +771,7 @@ function renderChecks(days){
     if (last && last.key === key) last.n++; else nights.push({key, n: 1, from: i + 1});
   });
   nights.forEach(s => items.push(['stay-' + s.key, '住宿：' + s.key, `Day ${s.from} 起・${s.n} 晚・5 人房或兩間房`]));
-  days.forEach((d, i) => d.stops.filter(s => s.act).forEach(s => items.push(['act-' + s.act, s.n + '（' + s.en.split(' · ')[0] + '）', `Day ${i + 1}・約 ${s.price.toLocaleString()} ISK／人`])));
+  days.forEach((d, i) => d.stops.filter(s => s.act && !s.walkin).forEach(s => items.push(['act-' + s.act, s.n + '（' + s.en.split(' · ')[0] + '）', `Day ${i + 1}・約 ${s.price.toLocaleString()} ISK／人`])));
   const done = items.filter(it => checks[it[0]]).length;
   document.getElementById('prog').style.width = (done / items.length * 100) + '%';
   document.getElementById('checks').innerHTML = items.map(([id, t, sub]) =>
